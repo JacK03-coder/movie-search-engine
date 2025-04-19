@@ -1,28 +1,26 @@
 import React from "react";
 
-function MovieCard({ movie }) {
+function MovieCard({ movie:
+  {title,poster_path , release_date , vote_average,original_language} 
+}){
   return (
-    <div className="movie-card">
-      <img
-        src={movie.Poster}
-        alt={`Poster Of ${movie.Title}`}
-        onError={(e) => {
-          e.target.src = "/no-movie.png";
-        }}
-      />
-      <div className="mt-4">
-      <h3>{movie.Title}</h3>
-      </div>
-      <div className="cotent">
-        <div className="rating">
-        <img src="star.svg" alt="star icon" />
-        <p>{movie.Year}</p>
-        <span>•</span>
-        <p>{movie.Type}</p>
-        </div>
-      </div>
+   <div className="movie-card">
+    <img src={poster_path ? `https://images.tmdb.org/t/p/w500/${poster_path}`:'/no-movie.png'} alt={title} />
+    <div className="mt-3">
+      <h3>{title}</h3>
 
+      <div className="content">
+        <div className="rating">
+          <img src="/star.svg" alt="star-icon"/>
+          <p>{vote_average ? vote_average.toFixed(1):'N/A'}</p>
+        </div>
+        <span>•</span>
+        <p className="lang">{original_language}</p>
+        <span>•</span>
+        <p className="year">{release_date ? release_date.split('-')[0]:'N/A'}</p>
+      </div>
     </div>
+   </div>
   );
 }
 
